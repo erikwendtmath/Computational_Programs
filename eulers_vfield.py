@@ -8,8 +8,8 @@ from matplotlib.widgets import Slider
 x,y = np.meshgrid(np.linspace(-5,5,20),np.linspace(-5,5,20))
 
 # define the function we are making the DF for
-def fnc(x,y,t=4.9):
-    return np.sin(x+t+y),np.cos(x-t)+np.sin(y)
+def fnc(x,y,t=0):
+    return y+t,-x
 
 u,v = fnc(x,y) # evaluate the fnc at each point
 
@@ -21,8 +21,8 @@ quiver = ax.quiver(x,y,u,v) # initial vector field
 # h update and euler's is defined first. Since the VF does not depend on the euler's apx,
 # we use two different update functions
 x0 = np.zeros((2,1),dtype=float)
-a,b = 0,20
-sln = eulers.sysfeuler(fnc,x0,a,b,s=4.9,h=1e-1)
+a,b = 0,30
+sln = eulers.sysfeuler(fnc,x0,a,b,s=0,h=1e-1)
 line, = ax.plot(sln[0][:],sln[1][:],'b')
 
 plt.subplots_adjust(left=0.25) # space for left slider bar
